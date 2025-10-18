@@ -137,6 +137,7 @@ h1, h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(213, 148, 72);
 
     height: 33px;
 }
