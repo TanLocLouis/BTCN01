@@ -8,6 +8,7 @@ body {
 }
 
 h1, h2 {
+    color: white;
     margin: 0;
     padding: 0;
 }
@@ -28,6 +29,7 @@ h1, h2 {
 .nav-parent-title {
     margin-top: 10px;
 
+    color: white;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -45,6 +47,7 @@ h1, h2 {
 .nav-menu {
     width: 50%;
     height: 25px;
+    background-color: rgb(189, 210, 248);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -77,6 +80,7 @@ h1, h2 {
 .side-section-title {
     padding: 0.5em;
 
+    background-color: rgb(213, 148, 72);
 }
 
 
@@ -120,6 +124,8 @@ h1, h2 {
 
 .container-header-middle > button {
     border-radius: 1em;
+    color: white;
+    background-color: rgb(109, 141, 231);
 
     border: none;;
     height: 24px;
