@@ -47,12 +47,20 @@ $(function () {
         $('.highlight').css('background-color', color);
     });
 
+
     $('#btn-delete').on('click', function (e) {
         e.preventDefault();
+        var input = $('#search-input').val().trim();
+        if (!input) return;
+        var regex = makeRegexFromInput(input);
+        if (!regex) return;
 
-        currentHtml = $para.html();
+        // Remove matches from the working copy and update display
+        currentHtml = currentHtml.replace(regex, '');
+        $para.html(currentHtml);
+    });
 
-        // clear highlights
-        $('#search-input').val().trim();
+    $('#btn-reset').on('click', function (e) {
+        e.preventDefault();
     })
 });
