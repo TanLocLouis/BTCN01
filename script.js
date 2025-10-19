@@ -32,6 +32,7 @@ $(function () {
         var regex = makeRegexFromInput(input);
         if (!regex) return;
 
+
         // replace matches with highlighted spans
         var highlighted = currentHtml.replace(regex, function (match) {
             return '<span class="highlight" style="background-color:' + color + '">' + match + '</span>';
@@ -39,6 +40,12 @@ $(function () {
 
         $para.html(highlighted);
     })
+
+    // update highlight color in real-time
+    $('#color-picker').on('input', function (e) {
+        var color = $(this).val() || 'yellow';
+        $('.highlight').css('background-color', color);
+    });
 
     $('#btn-delete').on('click', function (e) {
         e.preventDefault();
