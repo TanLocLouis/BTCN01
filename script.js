@@ -35,7 +35,7 @@ $(function () {
 
         // replace matches with highlighted spans
         var highlighted = currentHtml.replace(regex, function (match) {
-            return '<span class="highlight" style="background-color:' + color + '">' + match + '</span>';
+            return '<span class="highlight" style="color:' + color + '">' + match + '</span>';
         });
 
         $para.html(highlighted);
@@ -44,7 +44,8 @@ $(function () {
     // update highlight color in real-time
     $('#color-picker').on('input', function (e) {
         var color = $(this).val() || 'yellow';
-        $('.highlight').css('background-color', color);
+        $('.highlight').css('color', color);
+        $('#sample-text').css('color', color);
     });
 
 
