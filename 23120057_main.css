@@ -77,10 +77,62 @@ h1, h2 {
     margin-bottom: 0.5em;
 }
 
+/* collapsible side sections */
 .side-section-title {
     padding: 0.5em;
 
     background-color: rgb(213, 148, 80);
+    position: relative;
+    text-align: center;
+}
+
+.side-section-arrow {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.side-section-drag {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: ns-resize;
+}
+
+.side-section-drag::before {
+    content: "\2195";
+    font-size: 18px;
+    color: #fff;
+    display: block;
+}
+
+.side-section-arrow::before {
+    content: "\25BC";
+    font-size: 16px;
+    color: #fff;
+    transition: transform 0.3s;
+    display: block;
+}
+
+.side-section.collapsed .side-section-arrow::before {
+    transform: rotate(-90deg);
+}
+
+/* Draggable placeholder */
+.side-section-placeholder {
+    border: 2px dashed #ccc;
+    background-color: #f9f9f9;
+    height: 50px;
+    margin-bottom: 0.5em;
 }
 
 
@@ -176,7 +228,7 @@ h1, h2 {
 .custom-select::before {
   content: "▼";
   position: absolute;
-  right: 8px;
+  right: 15px;
   font-size: 10px;
   color: gray;
   pointer-events: none;
@@ -184,6 +236,8 @@ h1, h2 {
 
 .custom-select::after {
   content: "";
+  position: absolute;
+  right: 25px;
   width: 2px;
   height: 20px;
   background: #999;
@@ -238,44 +292,6 @@ h1, h2 {
 .sample-underline { text-decoration: underline; }
 
 
-
-/* collapsible side sections */
-.side-section-title {
-    cursor: ns-resize;
-    position: relative;
-    text-align: center;
-}
-
-.side-section-title::after {
-    content: "▼";
-    position: absolute;
-    left: 2px;
-    transition: transform 0.3s;
-}
-
-.side-section-title::before {
-    content: "\2195"; /* ↕ */;
-    position: absolute;
-    right: 10px;
-}
-
-.side-section.collapsed .side-section-title::after {
-    transform: rotate(-90deg);
-}
-
-.side-section p {
-    margin: 0;
-    padding: 0.5em;
-}
-
-/* Draggable placeholder */
-.side-section-placeholder {
-    border: 2px dashed #ccc;
-    background-color: #f9f9f9;
-    height: 50px;
-    margin-bottom: 0.5em;
-}
-
 .container-drag-drop {
     padding: 1em;
     display: grid;
@@ -302,6 +318,15 @@ h1, h2 {
   border-radius: 10px;
   font-size: 2em;
   cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.2s;
+  z-index: 1;
+}
+.drag-grid-item.ui-sortable-helper {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  z-index: 10;
+}
+.drag-grid-item.ui-sortable-placeholder {
+  visibility: hidden !important;
 }
 
 .label {
@@ -402,4 +427,40 @@ h1, h2 {
         gap: 0.5em;
         align-items: center;
     }
+}
+
+
+.container-drag-drop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 70px;
+  margin-top: 1em;
+  position: relative;
+}
+
+/* smoothly move items when layout changes */
+.drag-grid-item {
+  transition: transform 1000ms ease, box-shadow 1000ms ease;
+}
+
+
+.nav-menu li,
+.footer-menu li {
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-menu li.hover,
+.footer-menu li.hover,
+.nav-menu li:hover,
+.footer-menu li:hover {
+  color: #6b7ce0;
+}
+
+.nav-menu li.active,
+.footer-menu li.active {
+  color: #3546b1;
 }

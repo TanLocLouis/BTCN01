@@ -26,7 +26,7 @@ $(function () {
         return new RegExp(escaped, 'gi');
     }
 
-    // Highlight button (uses search input) -----------------------------------------
+    // Highlight button (uses search input)
     $('#btn-hightlight').on('click', function (e) {
         e.preventDefault();
 
@@ -53,10 +53,10 @@ $(function () {
         if ($('#sample-italic').is(':checked')) $hightlight.addClass('sample-italic');
         if ($('#sample-underline').is(':checked')) $hightlight.addClass('sample-underline');
     })
-    //-------------------------------------------------------------------------------
+    //-
 
 
-    // Dropdown ---------------------------------------------------------------
+    // Dropdown 
     // toggle sample options dropdown
     $('#sample-text-option').on('click', function (e) {
         e.stopPropagation();
@@ -74,11 +74,11 @@ $(function () {
     $('#sample-options').on('click', function (e) {
         e.stopPropagation();
     });
-    //-------------------------------------------------------------------------------
+    //-
 
 
 
-    // Sample text controls ---------------------------------------------
+    // Sample text controls 
     // outside color-picker controls highlight text color (foreground)
     $('#color-picker').on('input', function (e) {
         var color = $(this).val() || '#000000';
@@ -131,10 +131,10 @@ $(function () {
         if (initFore) document.documentElement.style.setProperty('--highlight-fore', initFore);
         $('#sample-text').css('color', initFore);
     }
-    //-------------------------------------------------------------------------------
+    //-
 
 
-    // Delete button (uses search input) --------------------------------------------
+    // Delete button (uses search input)
     $('#btn-delete').on('click', function (e) {
         e.preventDefault();
         var input = $('#search-input').val().trim();
@@ -146,10 +146,10 @@ $(function () {
         currentHtml = currentHtml.replace(regex, '');
         $para.html(currentHtml);
     });
-    //-------------------------------------------------------------------------------
+    //-
 
 
-    // Reset button -----------------------------------------------------------------
+    // Reset button
     $('#btn-reset').on('click', function (e) {
         e.preventDefault();
 
@@ -157,30 +157,24 @@ $(function () {
         $para.html(initialHtml);
         $('#search-input').val('');
     })
-    //-------------------------------------------------------------------------------
+    //-
     
 
-    // Expand/Collapse for sidebar sections -----------------------------------------
-    $('.side-section-title').on('click', function () {
+    // expand/Collapse for sidebar sections ONLY when clicking triangle icon
+    $(document).on('click', '.side-section-arrow', function (e) {
+        e.stopPropagation();
         const $section = $(this).closest('.side-section');
         const $content = $section.find('p');
-
-        // Toggle visibility with slide animation
         $content.slideToggle(200);
-
-        // Optionally toggle an "active" class for styling (arrow icon, etc.)
         $section.toggleClass('collapsed');
     });
-    //-------------------------------------------------------------------------------
 
-
-    // dragable Sidebar ------------------------------------------------
-
+    // dragable Sidebar 
     $(".side").sortable({
         axis: "y",             // Only vertical drag
-        handle: ".side-section-title", // Drag only by title bar
+        handle: ".side-section-drag", // Drag only by ns-resize icon
         cursor: "grabbing",
-        placeholder: "side-placeholder",
+        placeholder: "side-section-placeholder",
         start: function (event, ui) {
             ui.placeholder.height(ui.item.height());
             ui.item.addClass("dragging");
@@ -197,22 +191,34 @@ $(function () {
         }
     });
 
-    // Enable drag-and-drop sorting for grid items with animation and dashed border
     $('.container-drag-drop').sortable({
-        revert: "invalid",
+        revert: 500,
         items: '.drag-grid-item',
         placeholder: 'drag-grid-placeholder',
         tolerance: 'pointer',
-        revert: 150,
-        revertDuration: 200,
-        start: function(event, ui) {
+        start: function (event, ui) {
+            ui.item.addClass('dragging');
             ui.placeholder.height(ui.item.height());
             ui.placeholder.width(ui.item.width());
+        },
+        change: function (event, ui) {
+            // Smoothly move other items into position
+            $('.drag-grid-item:not(.ui-sortable-helper)').each(function () {
+            const $this = $(this);
+            $this.stop(true, true).animate({
+                top: $this.position().top,
+                left: $this.position().left
+            }, 500);
+            });
+        },
+        stop: function (event, ui) {
+            ui.item.removeClass('dragging');
         }
     });
 
 
-    // Add icon to grid when Add new is clicked
+
+    // add icon to grid when Add new is clicked
     $(document).on('click', '.container-header-middle button', function() {
         var $select = $(this).siblings('.custom-select').find('select');
         var selectedIndex = $select.prop('selectedIndex');
@@ -227,4 +233,33 @@ $(function () {
         $item.html(html);
         $grid.append($item);
     });
+
+
+ // load saved active index (if any)
+  const savedIndex = localStorage.getItem('activeMenuIndex');
+  if (savedIndex) {
+    $('.nav-menu li[data-index="' + savedIndex + '"], .footer-menu li[data-index="' + savedIndex + '"]')
+      .addClass('active');
+  }
+
+  // hover and click sync
+  $('.nav-menu li, .footer-menu li').on({
+    mouseenter: function () {
+      const index = $(this).index();
+      $('.nav-menu li, .footer-menu li').removeClass('hover');
+      $('.nav-menu li').eq(index).addClass('hover');
+      $('.footer-menu li').eq(index).addClass('hover');
+    },
+    mouseleave: function () {
+    },
+    click: function () {
+      const index = $(this).index();
+      $('.nav-menu li, .footer-menu li').removeClass('active');
+      $('.nav-menu li').eq(index).addClass('active');
+      $('.footer-menu li').eq(index).addClass('active');
+    }
+  });
+
+
+
 });
