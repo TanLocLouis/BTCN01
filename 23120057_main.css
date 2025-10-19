@@ -205,15 +205,38 @@ h1, h2 {
   position: relative;
 }
 
-
-
-
-
 /* Highlighted text */
 .highlight {
-    background-color: yellow;
-    color: black;
+    background-color: var(--highlight-color, yellow);
+    color: var(--highlight-fore, black);
 }
+
+/* Sample options dropdown */
+.options-dropdown {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    width: 200px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    padding: 8px;
+    border-radius: 6px;
+    z-index: 100;
+    display: none;
+}
+.options-dropdown[aria-hidden="false"] {
+    display: block;
+}
+.options-dropdown .option-row {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+/* Sample formatting helper classes */
+.sample-bold { font-weight: 700; }
+.sample-italic { font-style: italic; }
+.sample-underline { text-decoration: underline; }
 
 
 
