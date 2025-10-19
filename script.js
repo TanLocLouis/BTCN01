@@ -20,4 +20,23 @@ $(function () {
         var escaped = input.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
         return new RegExp(escaped, 'gi');
     }
+
+    $('btn-hightlight').on('click', function (e) {
+        e.preventDefault();
+
+        var input = $('#search-input').val().trim();
+        var color = $('#color-picker').val() || 'yellow';
+        // return early if no input
+        if (!input) return;
+
+        var regex = makeRegexFromInput(input);
+        if (!regex) return;
+
+        // replace matches with highlighted spans
+        var highlighted = currentHtml.replace(regex, function (match) {
+            return '<span class="highlight" style="background-color:' + color + '">' + match + '</span>';
+        });
+
+        $para.html(highlighted);
+    })
 });
