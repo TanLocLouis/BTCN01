@@ -276,6 +276,20 @@ h1, h2 {
     margin-bottom: 0.5em;
 }
 
+.container-drag-drop {
+
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1em;
+}
+
+.container-drag-drop > div {
+    margin: 0;
+    width: 100px;
+    height: 75px;
+}
+
 /* Responsive for 576px breakpoint */
 @media (max-width: 576px) {
     .main-page {
