@@ -329,7 +329,16 @@ h1, h2 {
         height: auto;
         padding: 0.5em 0;
     }
-    
+    .footer {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5em 0;
+    }
+    .footer-menu {
+        flex-direction: column;
+        gap: 0.5em;
+        align-items: center;
+    }
 }
 
 
