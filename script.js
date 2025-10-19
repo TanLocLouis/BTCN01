@@ -176,4 +176,24 @@ $(function () {
 
     // dragable Sidebar ------------------------------------------------
 
+    $(".side").sortable({
+        axis: "y",             // Only vertical drag
+        handle: ".side-section-title", // Drag only by title bar
+        cursor: "grabbing",
+        placeholder: "side-placeholder",
+        start: function (event, ui) {
+            ui.placeholder.height(ui.item.height());
+            ui.item.addClass("dragging");
+        },
+        stop: function (event, ui) {
+            ui.item.removeClass("dragging");
+        },
+        update: function (event, ui) {
+            // Optional: log new order
+            const newOrder = $(this).children().map(function () {
+                return this.id;
+            }).get();
+            console.log("Sidebar new order:", newOrder);
+        }
+    });
 });
