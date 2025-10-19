@@ -42,5 +42,10 @@ $(function () {
 
     $('#btn-delete').on('click', function (e) {
         e.preventDefault();
+
+        currentHtml = $para.html();
+
+        // clear highlights
+        $('#search-input').val().trim();
     })
 });
