@@ -330,14 +330,14 @@ h1, h2 {
 }
 
 .drag-grid-placeholder {
-  border: 2px dashed #6b7ce0;
+  border: 3px dashed #6b7ce0;
   background: #eaf0ff;
   border-radius: 10px;
   min-width: 60px;
   min-height: 60px;
   margin: 6px;
   box-sizing: border-box;
-  transition: all 0.2s;
+  transition: all 0.4s;
 }
 
 /* Responsive for 576px breakpoint */
