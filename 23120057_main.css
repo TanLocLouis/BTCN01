@@ -276,6 +276,61 @@ h1, h2 {
     margin-bottom: 0.5em;
 }
 
+/* Responsive for 576px breakpoint */
+@media (max-width: 576px) {
+    .main-page {
+        max-width: 100vw;
+        width: 100vw;
+    }
+    .main-container {
+        display: block;
+        grid-template-columns: none;
+        margin-top: 0;
+    }
+    .side {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1em;
+    }
+    .side-section {
+        margin-bottom: 1em;
+    }
+    .container {
+        width: 100%;
+    }
+    .container-1 {
+        margin-left: 0;
+        margin-bottom: 1em;
+        height: auto;
+        border-radius: 0.5em;
+    }
+    .container-header {
+        flex-direction: column;
+        height: auto;
+        padding: 1em 0.5em;
+        gap: 0.5em;
+    }
+    .container-header-middle {
+        flex-direction: column;
+        gap: 0.5em;
+        width: 100%;
+    }
+    .container-header-right {
+        flex-direction: column;
+        gap: 0.5em;
+        width: 100%;
+    }
+    .nav-menu {
+        width: 100vw;
+        left: 0;
+        top: 60px;
+        font-size: 0.9em;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.5em 0;
+    }
+    
+}
 
 
 
