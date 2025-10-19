@@ -196,4 +196,19 @@ $(function () {
             console.log("Sidebar new order:", newOrder);
         }
     });
+
+
+    // Add icon to grid when Add new is clicked
+    $(document).on('click', '.container-header-middle button', function() {
+        var $select = $(this).siblings('.custom-select').find('select');
+        var selectedIndex = $select.prop('selectedIndex');
+        var icons = ['🐭', '🐕', '😺', '🦅', '🐄', '🐎'];
+        var labels = ['Mouse', 'Dog', 'Cat', 'Eagle', 'Cow', 'Horse'];
+        var icon = icons[selectedIndex] || '❓';
+        var label = labels[selectedIndex] || 'Unknown';
+        var $grid = $(this).closest('.container-1').find('.container-drag-drop');
+        var $item = $('<div class="drag-grid-item"></div>');
+        $item.html('<span class="icon">' + icon + '</span><span class="label">' + label + '</span>');
+        $grid.append($item);
+    });
 });
