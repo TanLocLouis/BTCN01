@@ -198,6 +198,19 @@ $(function () {
     });
 
 
+    // Enable drag-and-drop sorting for grid items with animation and dashed border
+    $('.container-drag-drop').sortable({
+        items: '.drag-grid-item',
+        placeholder: 'drag-grid-placeholder',
+        tolerance: 'pointer',
+        revert: 150,
+        start: function(event, ui) {
+            ui.placeholder.height(ui.item.height());
+            ui.placeholder.width(ui.item.width());
+        }
+    });
+
+
     // Add icon to grid when Add new is clicked
     $(document).on('click', '.container-header-middle button', function() {
         var $select = $(this).siblings('.custom-select').find('select');

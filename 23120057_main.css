@@ -283,12 +283,6 @@ h1, h2 {
     gap: 1em;
 }
 
-.container-drag-drop > div {
-    margin: 0;
-    width: 100px;
-    height: 75px;
-}
-
 .grid-item {
     display: flex;
     flex-direction: column;
@@ -304,23 +298,18 @@ h1, h2 {
   justify-content: center;
   width: 120px;
   height: 120px;
-  margin: 6px;
+  margin-bottom: 5px;
   border-radius: 10px;
   font-size: 2em;
   cursor: pointer;
+  transition: transform 0.2s;
 }
-.drag-grid-item {
-  font-family: Arial, sans-serif;
-  font-size: 0.7em;
-  margin-top: 2em;
-}
+
 .label {
     margin: 0;
     font-size: 0.5em;
 }
-.drag-grid-item {
-  font-size: 2em;
-}
+
 .icon {
     width: 100px;
     height: 75px;
@@ -331,6 +320,7 @@ h1, h2 {
 
     background: radial-gradient(circle, rgb(178, 197, 254), rgb(23, 123, 223));
 }
+
 .container-drag-drop {
   display: flex;
   flex-wrap: wrap;
