@@ -158,4 +158,17 @@ $(function () {
         $('#search-input').val('');
     })
     //-------------------------------------------------------------------------------
+    
+
+    // Expand/Collapse for sidebar sections -----------------------------------------
+    $('.side-section-title').on('click', function () {
+        const $section = $(this).closest('.side-section');
+        const $content = $section.find('p');
+
+        // Toggle visibility with slide animation
+        $content.slideToggle(200);
+
+        // Optionally toggle an "active" class for styling (arrow icon, etc.)
+        $section.toggleClass('collapsed');
+    });
 });

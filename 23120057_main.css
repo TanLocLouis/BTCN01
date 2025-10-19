@@ -233,10 +233,34 @@ h1, h2 {
     font-size: 14px;
 }
 
-/* Sample formatting helper classes */
 .sample-bold { font-weight: 700; }
 .sample-italic { font-style: italic; }
 .sample-underline { text-decoration: underline; }
+
+
+
+/* collapsible side sections */
+.side-section-title {
+    cursor: ;
+    position: relative;
+    text-align: center;
+}
+
+.side-section-title::after {
+    content: "▼";
+    position: absolute;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+.side-section.collapsed .side-section-title::after {
+    transform: rotate(-90deg);
+}
+
+.side-section p {
+    margin: 0;
+    padding: 0.5em;
+}
 
 
 
