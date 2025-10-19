@@ -3,6 +3,12 @@ $(function () {
     var initialHtml = $para.html();
     var currentHtml = initialHtml;
 
+    var formatOption = {
+        bold: $('#sample-bold'),
+        italic: $('#sample-italic'),
+        underline: $('#sample-underline')
+    }
+
     function makeRegexFromInput(input) {
         if (!input) return null;
 
@@ -20,12 +26,12 @@ $(function () {
         return new RegExp(escaped, 'gi');
     }
 
-    // Highlight button (uses search input)
+    // Highlight button (uses search input) -----------------------------------------
     $('#btn-hightlight').on('click', function (e) {
         e.preventDefault();
 
         var input = $('#search-input').val().trim();
-        var color = $('#color-picker').val() || '#ffff00';
+        var color = $('#sample-bg-color').val() || '#ffff00';
         // return early if no input
         if (!input) return;
 
@@ -40,17 +46,17 @@ $(function () {
         // set css variable so highlights show the selected background color
         document.documentElement.style.setProperty('--highlight-color', color);
         $para.html(currentHtml);
+
+        var $hightlight = $('.highlight');
+        $hightlight.removeClass('sample-bold sample-italic sample-underline');
+        if ($('#sample-bold').is(':checked')) $hightlight.addClass('sample-bold');
+        if ($('#sample-italic').is(':checked')) $hightlight.addClass('sample-italic');
+        if ($('#sample-underline').is(':checked')) $hightlight.addClass('sample-underline');
     })
+    //-------------------------------------------------------------------------------
 
-    // Outside color-picker controls highlight text color (foreground)
-    $('#color-picker').on('input', function (e) {
-        var color = $(this).val() || '#000000';
-        // set CSS variable for highlight foreground color
-        document.documentElement.style.setProperty('--highlight-fore', color);
-        // also apply to sample-text color so user sees the text color change
-        $('#sample-text').css('color', color);
-    });
 
+    // Dropdown ---------------------------------------------------------------
     // toggle sample options dropdown
     $('#sample-text-option').on('click', function (e) {
         e.stopPropagation();
@@ -68,19 +74,41 @@ $(function () {
     $('#sample-options').on('click', function (e) {
         e.stopPropagation();
     });
+    //-------------------------------------------------------------------------------
+
+
+
+    // Sample text controls ---------------------------------------------
+    // outside color-picker controls highlight text color (foreground)
+    $('#color-picker').on('input', function (e) {
+        var color = $(this).val() || '#000000';
+        // set CSS variable for highlight foreground color
+        document.documentElement.style.setProperty('--highlight-fore', color);
+        // also apply to sample-text color so user sees the text color change
+        $('#sample-text').css('color', color);
+    });
+
 
     // apply sample formatting when checkboxes change
     function applySampleFormatting() {
+        // update for Sample text
         var $label = $('#sample-text');
         $label.removeClass('sample-bold sample-italic sample-underline');
         if ($('#sample-bold').is(':checked')) $label.addClass('sample-bold');
         if ($('#sample-italic').is(':checked')) $label.addClass('sample-italic');
         if ($('#sample-underline').is(':checked')) $label.addClass('sample-underline');
-    }
 
+        // update realtime highlights in the paragraph
+        var $hightlight = $('.highlight');
+        $hightlight.removeClass('sample-bold sample-italic sample-underline');
+        if ($('#sample-bold').is(':checked')) $hightlight.addClass('sample-bold');
+        if ($('#sample-italic').is(':checked')) $hightlight.addClass('sample-italic');
+        if ($('#sample-underline').is(':checked')) $hightlight.addClass('sample-underline');
+    }
     $('#sample-bold, #sample-italic, #sample-underline').on('change', applySampleFormatting);
 
-    // sample background color input controls highlight background color
+
+    // change background color in realtime 
     $('#sample-bg-color').on('input change', function () {
         var color = $(this).val() || '#ffff00';
         $('#sample-text').css('background-color', color);
@@ -95,14 +123,18 @@ $(function () {
         $('#sample-text').css('background-color', initBg);
         document.documentElement.style.setProperty('--highlight-color', initBg);
     }
+
+
     // initialize highlight foreground from outside color-picker
     if ($('#color-picker').length) {
         var initFore = $('#color-picker').val();
         if (initFore) document.documentElement.style.setProperty('--highlight-fore', initFore);
         $('#sample-text').css('color', initFore);
     }
+    //-------------------------------------------------------------------------------
 
 
+    // Delete button (uses search input) --------------------------------------------
     $('#btn-delete').on('click', function (e) {
         e.preventDefault();
         var input = $('#search-input').val().trim();
@@ -114,7 +146,10 @@ $(function () {
         currentHtml = currentHtml.replace(regex, '');
         $para.html(currentHtml);
     });
+    //-------------------------------------------------------------------------------
 
+
+    // Reset button -----------------------------------------------------------------
     $('#btn-reset').on('click', function (e) {
         e.preventDefault();
 
@@ -122,4 +157,5 @@ $(function () {
         $para.html(initialHtml);
         $('#search-input').val('');
     })
+    //-------------------------------------------------------------------------------
 });
