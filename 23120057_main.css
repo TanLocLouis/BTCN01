@@ -329,6 +329,17 @@ h1, h2 {
   margin-top: 1em;
 }
 
+.drag-grid-placeholder {
+  border: 2px dashed #6b7ce0;
+  background: #eaf0ff;
+  border-radius: 10px;
+  min-width: 60px;
+  min-height: 60px;
+  margin: 6px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
 /* Responsive for 576px breakpoint */
 @media (max-width: 576px) {
     .main-page {
