@@ -208,7 +208,9 @@ $(function () {
         var label = labels[selectedIndex] || 'Unknown';
         var $grid = $(this).closest('.container-1').find('.container-drag-drop');
         var $item = $('<div class="drag-grid-item"></div>');
-        $item.html('<span class="icon">' + icon + '</span><span class="label">' + label + '</span>');
+        const html =
+        '<div class="grid-item"> <span class="icon">' + icon + '</span><span class="label">' + label + '</span>' +'</div>';
+        $item.html(html);
         $grid.append($item);
     });
 });
