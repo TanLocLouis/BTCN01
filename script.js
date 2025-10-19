@@ -21,7 +21,7 @@ $(function () {
         return new RegExp(escaped, 'gi');
     }
 
-    $('btn-hightlight').on('click', function (e) {
+    $('#btn-hightlight').on('click', function (e) {
         e.preventDefault();
 
         var input = $('#search-input').val().trim();
@@ -38,5 +38,9 @@ $(function () {
         });
 
         $para.html(highlighted);
+    })
+
+    $('#btn-delete').on('click', function (e) {
+        e.preventDefault();
     })
 });
