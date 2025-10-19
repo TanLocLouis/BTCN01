@@ -62,5 +62,9 @@ $(function () {
 
     $('#btn-reset').on('click', function (e) {
         e.preventDefault();
+
+        currentHtml = initialHtml;
+        $para.html(initialHtml);
+        $('#search-input').val('');
     })
 });
