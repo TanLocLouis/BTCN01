@@ -171,4 +171,9 @@ $(function () {
         // Optionally toggle an "active" class for styling (arrow icon, etc.)
         $section.toggleClass('collapsed');
     });
+    //-------------------------------------------------------------------------------
+
+
+    // dragable Sidebar ------------------------------------------------
+
 });
