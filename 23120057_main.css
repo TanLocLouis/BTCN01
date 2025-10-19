@@ -241,7 +241,7 @@ h1, h2 {
 
 /* collapsible side sections */
 .side-section-title {
-    cursor: ;
+    cursor: ns-resize;
     position: relative;
     text-align: center;
 }
@@ -251,6 +251,12 @@ h1, h2 {
     position: absolute;
     left: 2px;
     transition: transform 0.3s;
+}
+
+.side-section-title::before {
+    content: "\2195"; /* ↕ */;
+    position: absolute;
+    right: 10px;
 }
 
 .side-section.collapsed .side-section-title::after {
