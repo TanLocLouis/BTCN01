@@ -199,12 +199,15 @@ $(function () {
 
     // Enable drag-and-drop sorting for grid items with animation and dashed border
     $('.container-drag-drop').sortable({
+        revert: "invalid",
         items: '.drag-grid-item',
         placeholder: 'drag-grid-placeholder',
         tolerance: 'pointer',
         revert: 150,
         revertDuration: 200,
         start: function(event, ui) {
+            ui.placeholder.height(ui.item.height());
+            ui.placeholder.width(ui.item.width());
         }
     });
 
